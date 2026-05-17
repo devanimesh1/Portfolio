@@ -111,9 +111,9 @@ export default function RecruiterMode() {
       <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
+        transition={{ delay: 2, duration: 0.6 }}
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 left-6 z-40 flex items-center gap-2 rounded-full border border-[#ffaa00]/30 bg-[#ffaa00]/10 px-4 py-2.5 text-sm font-medium text-[#ffaa00] shadow-lg backdrop-blur-sm transition-all hover:bg-[#ffaa00]/20"
+        className="fixed bottom-6 left-6 z-40 flex items-center gap-2 rounded-2xl border border-[#ffaa00]/15 bg-[#ffaa00]/5 px-4 py-2.5 text-sm font-medium text-[#ffaa00]/80 shadow-xl shadow-[#ffaa00]/5 backdrop-blur-xl transition-all duration-500 hover:border-[#ffaa00]/30 hover:bg-[#ffaa00]/10 hover:text-[#ffaa00] hover:shadow-2xl hover:shadow-[#ffaa00]/10"
       >
         <Sparkles size={16} />
         <span className="hidden sm:inline">Recruiter Mode</span>
@@ -125,34 +125,36 @@ export default function RecruiterMode() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-6"
             onClick={() => setIsOpen(false)}
           >
-            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
+            <div className="absolute inset-0 bg-[#050510]/90 backdrop-blur-md" />
 
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-h-[85vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-white/10 bg-[#0a0a14]"
+              className="relative max-h-[85vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-white/[0.06] bg-[#0a0a14]/95 backdrop-blur-2xl shadow-2xl"
             >
               {/* Header */}
-              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-white/5 bg-[#0d0d1a] px-6 py-4">
+              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-white/[0.04] bg-[#0a0a18]/90 px-6 py-4 backdrop-blur-xl">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#ffaa00]/30 bg-[#ffaa00]/10">
-                    <BarChart3 size={14} className="text-[#ffaa00]" />
+                  <div className="flex h-8 w-8 items-center justify-center rounded-xl border border-[#ffaa00]/15 bg-[#ffaa00]/5">
+                    <BarChart3 size={14} className="text-[#ffaa00]/80" />
                   </div>
                   <div>
-                    <div className="text-sm font-semibold text-white">Recruiter Mode</div>
-                    <div className="font-mono text-[10px] text-[#ffaa00]">
+                    <div className="text-sm font-semibold text-white/90">Recruiter Mode</div>
+                    <div className="font-mono text-[10px] text-[#ffaa00]/60">
                       AI-Powered Fit Analysis
                     </div>
                   </div>
                 </div>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="rounded-lg p-2 text-white/40 hover:bg-white/5 hover:text-white"
+                  className="rounded-xl p-2 text-white/30 transition-all duration-300 hover:bg-white/5 hover:text-white/60"
                 >
                   <X size={18} />
                 </button>
@@ -163,21 +165,21 @@ export default function RecruiterMode() {
                   <div className="space-y-6">
                     {/* JD Input */}
                     <div>
-                      <label className="mb-2 block font-mono text-xs uppercase tracking-wider text-white/40">
+                      <label className="mb-2 block font-mono text-[11px] uppercase tracking-wider text-white/30">
                         Paste Job Description
                       </label>
                       <textarea
                         value={jdText}
                         onChange={(e) => setJdText(e.target.value)}
                         rows={10}
-                        className="w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none placeholder:text-white/20 focus:border-[#ffaa00]/30"
+                        className="w-full resize-none rounded-xl border border-white/[0.06] bg-white/[0.03] px-4 py-3 text-sm text-white outline-none transition-all duration-500 placeholder:text-white/20 focus:border-[#ffaa00]/15 focus:shadow-[0_0_20px_rgba(255,170,0,0.05)]"
                         placeholder="Paste the job description here to analyze fit..."
                       />
                     </div>
 
                     {/* File upload */}
                     <div className="flex items-center gap-4">
-                      <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white/60 transition-all hover:bg-white/8">
+                      <label className="flex cursor-pointer items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.03] px-4 py-2.5 text-sm text-white/40 transition-all duration-500 hover:border-white/10 hover:bg-white/[0.05]">
                         <Upload size={14} />
                         Upload JD (.txt)
                         <input
@@ -192,7 +194,7 @@ export default function RecruiterMode() {
                     <button
                       onClick={handleAnalyze}
                       disabled={!jdText.trim() || isAnalyzing}
-                      className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#ffaa00]/30 bg-[#ffaa00]/10 px-6 py-3 text-sm font-medium text-[#ffaa00] transition-all hover:bg-[#ffaa00]/20 disabled:opacity-30"
+                      className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#ffaa00]/20 bg-[#ffaa00]/8 px-6 py-3.5 text-sm font-medium text-[#ffaa00] transition-all duration-500 hover:border-[#ffaa00]/40 hover:bg-[#ffaa00]/15 hover:shadow-[0_0_30px_rgba(255,170,0,0.1)] disabled:opacity-20"
                     >
                       {isAnalyzing ? (
                         <>
@@ -215,19 +217,19 @@ export default function RecruiterMode() {
                 ) : (
                   <div className="space-y-6">
                     {/* Fit Score */}
-                    <div className="rounded-2xl border border-white/5 bg-[#0d0d1a] p-6 text-center">
-                      <div className="mb-2 font-mono text-xs uppercase tracking-wider text-white/40">
+                    <div className="card-glass rounded-2xl p-8 text-center">
+                      <div className="mb-3 font-mono text-[11px] uppercase tracking-wider text-white/30">
                         Fit Score
                       </div>
-                      <div className="relative mx-auto mb-4 h-32 w-32">
+                      <div className="relative mx-auto mb-4 h-36 w-36">
                         <svg className="h-full w-full -rotate-90" viewBox="0 0 100 100">
                           <circle
                             cx="50"
                             cy="50"
                             r="40"
                             fill="none"
-                            stroke="rgba(255,255,255,0.05)"
-                            strokeWidth="8"
+                            stroke="rgba(255,255,255,0.03)"
+                            strokeWidth="6"
                           />
                           <motion.circle
                             cx="50"
@@ -241,7 +243,7 @@ export default function RecruiterMode() {
                                 ? '#ffaa00'
                                 : '#ff4466'
                             }
-                            strokeWidth="8"
+                            strokeWidth="6"
                             strokeLinecap="round"
                             initial={{ strokeDasharray: '0 251.2' }}
                             animate={{
@@ -251,7 +253,7 @@ export default function RecruiterMode() {
                           />
                         </svg>
                         <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="text-3xl font-bold text-white">
+                          <span className="text-3xl font-bold text-white/90">
                             {analysis.fitScore}%
                           </span>
                         </div>
@@ -259,15 +261,15 @@ export default function RecruiterMode() {
                     </div>
 
                     {/* Strengths */}
-                    <div className="rounded-xl border border-white/5 bg-[#0d0d1a] p-5">
-                      <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold text-[#00ff88]">
+                    <div className="card-glass rounded-xl p-5">
+                      <h4 className="mb-4 flex items-center gap-2 text-sm font-semibold text-[#00ff88]/80">
                         <CheckCircle size={14} />
                         Strengths
                       </h4>
-                      <ul className="space-y-2">
+                      <ul className="space-y-2.5">
                         {analysis.strengths.map((s, i) => (
-                          <li key={i} className="flex items-start gap-2 text-sm text-white/60">
-                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#00ff88]/60" />
+                          <li key={i} className="flex items-start gap-2.5 text-sm text-white/50">
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#00ff88]/50" />
                             {s}
                           </li>
                         ))}
@@ -276,15 +278,15 @@ export default function RecruiterMode() {
 
                     {/* Gaps */}
                     {analysis.gaps.length > 0 && (
-                      <div className="rounded-xl border border-white/5 bg-[#0d0d1a] p-5">
-                        <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold text-[#ffaa00]">
+                      <div className="card-glass rounded-xl p-5">
+                        <h4 className="mb-4 flex items-center gap-2 text-sm font-semibold text-[#ffaa00]/80">
                           <AlertTriangle size={14} />
                           Potential Gaps
                         </h4>
-                        <ul className="space-y-2">
+                        <ul className="space-y-2.5">
                           {analysis.gaps.map((g, i) => (
-                            <li key={i} className="flex items-start gap-2 text-sm text-white/60">
-                              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#ffaa00]/60" />
+                            <li key={i} className="flex items-start gap-2.5 text-sm text-white/50">
+                              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#ffaa00]/50" />
                               {g}
                             </li>
                           ))}
@@ -294,15 +296,15 @@ export default function RecruiterMode() {
 
                     {/* Matching */}
                     {analysis.matchingSkills.length > 0 && (
-                      <div className="rounded-xl border border-white/5 bg-[#0d0d1a] p-5">
-                        <h4 className="mb-3 text-sm font-semibold text-[#00d4ff]">
+                      <div className="card-glass rounded-xl p-5">
+                        <h4 className="mb-4 text-sm font-semibold text-[#00d4ff]/80">
                           Matching Skills
                         </h4>
                         <div className="flex flex-wrap gap-2">
                           {analysis.matchingSkills.map((s) => (
                             <span
                               key={s}
-                              className="rounded-full border border-[#00d4ff]/20 bg-[#00d4ff]/5 px-3 py-1 font-mono text-xs text-[#00d4ff]"
+                              className="rounded-full border border-[#00d4ff]/10 bg-[#00d4ff]/4 px-3 py-1 font-mono text-xs text-[#00d4ff]/70"
                             >
                               {s}
                             </span>
@@ -312,14 +314,14 @@ export default function RecruiterMode() {
                     )}
 
                     {analysis.matchingProjects.length > 0 && (
-                      <div className="rounded-xl border border-white/5 bg-[#0d0d1a] p-5">
-                        <h4 className="mb-3 text-sm font-semibold text-[#00d4ff]">
+                      <div className="card-glass rounded-xl p-5">
+                        <h4 className="mb-4 text-sm font-semibold text-[#00d4ff]/80">
                           Relevant Projects
                         </h4>
-                        <ul className="space-y-2">
+                        <ul className="space-y-2.5">
                           {analysis.matchingProjects.map((p) => (
-                            <li key={p} className="flex items-center gap-2 text-sm text-white/60">
-                              <FileText size={12} className="text-[#00d4ff]/60" />
+                            <li key={p} className="flex items-center gap-2.5 text-sm text-white/50">
+                              <FileText size={12} className="text-[#00d4ff]/40" />
                               {p}
                             </li>
                           ))}
@@ -329,14 +331,14 @@ export default function RecruiterMode() {
 
                     {/* ATS PDF Download */}
                     <div className="space-y-3">
-                      <h4 className="font-mono text-xs uppercase tracking-wider text-white/40">
+                      <h4 className="font-mono text-[11px] uppercase tracking-wider text-white/30">
                         Generate ATS Resume
                       </h4>
                       <div className="grid grid-cols-3 gap-3">
                         {['Recruiter', 'Consulting', 'Technical'].map((type) => (
                           <button
                             key={type}
-                            className="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-xs text-white/60 transition-all hover:border-[#00d4ff]/20 hover:bg-[#00d4ff]/5 hover:text-[#00d4ff]"
+                            className="flex items-center justify-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.03] px-4 py-3 text-xs text-white/40 transition-all duration-500 hover:border-[#00d4ff]/15 hover:bg-[#00d4ff]/[0.03] hover:text-[#00d4ff]/80"
                           >
                             <Download size={12} />
                             {type}
@@ -350,7 +352,7 @@ export default function RecruiterMode() {
                         setAnalysis(null);
                         setJdText('');
                       }}
-                      className="w-full rounded-xl border border-white/10 bg-white/5 px-6 py-3 text-sm text-white/60 transition-all hover:bg-white/8"
+                      className="w-full rounded-xl border border-white/[0.06] bg-white/[0.03] px-6 py-3 text-sm text-white/40 transition-all duration-500 hover:border-white/10 hover:bg-white/[0.05]"
                     >
                       Analyze Another JD
                     </button>

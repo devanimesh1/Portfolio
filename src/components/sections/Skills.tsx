@@ -13,36 +13,48 @@ const categories = [
   { key: 'DevOps', label: 'DevOps', color: '#44aaff' },
 ];
 
+const sectionFade = {
+  hidden: { opacity: 0, y: 40, filter: 'blur(8px)' },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] as const },
+  }),
+};
+
 export default function Skills() {
-  const { ref, isInView } = useInView(0.1);
+  const { ref, isInView } = useInView(0.05);
 
   return (
-    <section id="skills" className="relative overflow-hidden bg-black py-32">
-      <div className="absolute inset-0 grid-bg opacity-20" />
+    <section id="skills" className="section-glow aurora-bg relative overflow-hidden bg-[#050510] py-36">
+      <div className="absolute inset-0 grid-bg opacity-15" />
 
       <div ref={ref} className="relative z-10 mx-auto max-w-7xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="mb-4 flex items-center gap-3"
+          custom={0}
+          variants={sectionFade}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          className="mb-6 flex items-center gap-3"
         >
-          <div className="h-px w-12 bg-[#00d4ff]/50" />
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#00d4ff]">
+          <div className="h-px w-12 bg-gradient-to-r from-[#00d4ff]/60 to-transparent" />
+          <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#00d4ff]/80">
             AI Skill Cloud
           </span>
         </motion.div>
 
         <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="mb-16 text-3xl font-bold text-white sm:text-4xl"
+          custom={1}
+          variants={sectionFade}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          className="mb-16 text-3xl font-bold text-white sm:text-4xl lg:text-5xl"
         >
           Technical Arsenal
         </motion.h2>
 
-        <div className="space-y-12">
+        <div className="space-y-14">
           {categories.map((cat, catIndex) => {
             const categorySkills = skills.filter((s) => s.category === cat.key);
             if (categorySkills.length === 0) return null;
@@ -50,16 +62,17 @@ export default function Skills() {
             return (
               <motion.div
                 key={cat.key}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.2 + catIndex * 0.1 }}
+                custom={2 + catIndex}
+                variants={sectionFade}
+                initial="hidden"
+                animate={isInView ? 'visible' : 'hidden'}
               >
-                <div className="mb-4 flex items-center gap-3">
+                <div className="mb-5 flex items-center gap-3">
                   <div
-                    className="h-2 w-2 rounded-full"
-                    style={{ backgroundColor: cat.color }}
+                    className="h-1.5 w-1.5 rounded-full"
+                    style={{ backgroundColor: cat.color, boxShadow: `0 0 8px ${cat.color}40` }}
                   />
-                  <h3 className="font-mono text-xs uppercase tracking-wider text-white/50">
+                  <h3 className="font-mono text-[11px] uppercase tracking-wider text-white/40">
                     {cat.label}
                   </h3>
                 </div>
@@ -68,36 +81,38 @@ export default function Skills() {
                   {categorySkills.map((skill, skillIndex) => (
                     <motion.div
                       key={skill.name}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={isInView ? { opacity: 1, y: 0 } : {}}
                       transition={{
-                        duration: 0.4,
-                        delay: 0.3 + catIndex * 0.1 + skillIndex * 0.05,
+                        duration: 0.5,
+                        delay: 0.3 + catIndex * 0.08 + skillIndex * 0.04,
+                        ease: [0.16, 1, 0.3, 1],
                       }}
-                      className="neon-border group rounded-xl bg-[#0d0d1a] p-4 transition-all duration-300 hover:bg-[#141428]"
+                      className="card-glass group rounded-xl p-4"
                     >
                       <div className="mb-3 flex items-center justify-between">
-                        <span className="text-sm font-medium text-white">{skill.name}</span>
+                        <span className="text-sm font-medium text-white/85">{skill.name}</span>
                         <span
-                          className="font-mono text-xs"
-                          style={{ color: cat.color }}
+                          className="font-mono text-[11px]"
+                          style={{ color: `${cat.color}99` }}
                         >
                           {skill.level}%
                         </span>
                       </div>
 
-                      <div className="h-1 overflow-hidden rounded-full bg-white/5">
+                      <div className="h-1 overflow-hidden rounded-full bg-white/[0.04]">
                         <motion.div
                           initial={{ width: 0 }}
                           animate={isInView ? { width: `${skill.level}%` } : {}}
                           transition={{
-                            duration: 1,
-                            delay: 0.5 + catIndex * 0.1 + skillIndex * 0.05,
-                            ease: 'easeOut',
+                            duration: 1.2,
+                            delay: 0.5 + catIndex * 0.08 + skillIndex * 0.04,
+                            ease: [0.16, 1, 0.3, 1],
                           }}
                           className="h-full rounded-full"
                           style={{
-                            background: `linear-gradient(90deg, ${cat.color}40, ${cat.color})`,
+                            background: `linear-gradient(90deg, ${cat.color}20, ${cat.color}80)`,
+                            boxShadow: `0 0 8px ${cat.color}20`,
                           }}
                         />
                       </div>

@@ -5,8 +5,18 @@ import { useInView } from '@/hooks/useInView';
 import { personalInfo } from '@/data/resume';
 import { MapPin, Zap, Globe, Brain } from 'lucide-react';
 
+const sectionFade = {
+  hidden: { opacity: 0, y: 40, filter: 'blur(8px)' },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] as const },
+  }),
+};
+
 export default function About() {
-  const { ref, isInView } = useInView(0.2);
+  const { ref, isInView } = useInView(0.15);
 
   const highlights = [
     {
@@ -32,54 +42,58 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="relative overflow-hidden bg-black py-32">
-      <div className="absolute inset-0 grid-bg opacity-20" />
+    <section id="about" className="section-glow aurora-bg relative overflow-hidden bg-[#050510] py-36">
+      <div className="absolute inset-0 grid-bg opacity-15" />
 
       <div ref={ref} className="relative z-10 mx-auto max-w-7xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="mb-4 flex items-center gap-3"
+          custom={0}
+          variants={sectionFade}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          className="mb-6 flex items-center gap-3"
         >
-          <div className="h-px w-12 bg-[#00d4ff]/50" />
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#00d4ff]">
+          <div className="h-px w-12 bg-gradient-to-r from-[#00d4ff]/60 to-transparent" />
+          <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#00d4ff]/80">
             About
           </span>
         </motion.div>
 
-        <div className="grid gap-16 lg:grid-cols-2">
+        <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
           <div>
             <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="mb-8 text-3xl font-bold text-white sm:text-4xl"
+              custom={1}
+              variants={sectionFade}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+              className="mb-8 text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl"
             >
               Engineering AI Systems
               <br />
-              <span className="text-white/40">That Scale in Production</span>
+              <span className="text-white/30">That Scale in Production</span>
             </motion.h2>
 
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="mb-6 text-base leading-relaxed text-white/60"
+              custom={2}
+              variants={sectionFade}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+              className="mb-8 text-base leading-relaxed text-white/45 sm:text-lg"
             >
               {personalInfo.summary}
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              custom={3}
+              variants={sectionFade}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
               className="flex flex-wrap gap-2"
             >
               {personalInfo.coreExpertise.map((skill) => (
                 <span
                   key={skill}
-                  className="rounded-full border border-[#00d4ff]/15 bg-[#00d4ff]/5 px-3 py-1 font-mono text-xs text-[#00d4ff]/80"
+                  className="rounded-full border border-[#00d4ff]/10 bg-[#00d4ff]/4 px-3.5 py-1.5 font-mono text-[11px] text-[#00d4ff]/70 transition-all duration-300 hover:border-[#00d4ff]/25 hover:bg-[#00d4ff]/8"
                 >
                   {skill}
                 </span>
@@ -91,17 +105,20 @@ export default function About() {
             {highlights.map((item, i) => (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
-                className="neon-border group rounded-2xl bg-[#0d0d1a] p-6 transition-all duration-300"
+                custom={2 + i}
+                variants={sectionFade}
+                initial="hidden"
+                animate={isInView ? 'visible' : 'hidden'}
+                className="card-glass group rounded-2xl p-6"
               >
-                <item.icon
-                  size={24}
-                  className="mb-4 text-[#00d4ff] opacity-60 transition-opacity group-hover:opacity-100"
-                />
-                <h3 className="mb-2 text-sm font-semibold text-white">{item.title}</h3>
-                <p className="text-xs leading-relaxed text-white/40">{item.desc}</p>
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-[#00d4ff]/10 bg-[#00d4ff]/5 transition-all duration-500 group-hover:border-[#00d4ff]/25 group-hover:bg-[#00d4ff]/10 group-hover:shadow-[0_0_20px_rgba(0,212,255,0.08)]">
+                  <item.icon
+                    size={18}
+                    className="text-[#00d4ff]/70 transition-all duration-500 group-hover:text-[#00d4ff]"
+                  />
+                </div>
+                <h3 className="mb-2 text-sm font-semibold text-white/90">{item.title}</h3>
+                <p className="text-xs leading-relaxed text-white/35">{item.desc}</p>
               </motion.div>
             ))}
           </div>

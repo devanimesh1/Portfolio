@@ -31,76 +31,90 @@ const experiments = [
   },
 ];
 
+const sectionFade = {
+  hidden: { opacity: 0, y: 40, filter: 'blur(8px)' },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] as const },
+  }),
+};
+
 export default function AILab() {
-  const { ref, isInView } = useInView(0.2);
+  const { ref, isInView } = useInView(0.1);
 
   return (
-    <section id="ai-lab" className="relative overflow-hidden bg-black py-32">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0d0d1a]/50 via-transparent to-[#0d0d1a]/50" />
+    <section id="ai-lab" className="section-glow relative overflow-hidden bg-[#050510] py-36">
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a18]/60 via-transparent to-[#0a0a18]/60" />
 
       <div ref={ref} className="relative z-10 mx-auto max-w-7xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="mb-4 flex items-center gap-3"
+          custom={0}
+          variants={sectionFade}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          className="mb-6 flex items-center gap-3"
         >
-          <div className="h-px w-12 bg-[#00d4ff]/50" />
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#00d4ff]">
+          <div className="h-px w-12 bg-gradient-to-r from-[#00d4ff]/60 to-transparent" />
+          <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#00d4ff]/80">
             AI Lab
           </span>
         </motion.div>
 
         <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="mb-4 text-3xl font-bold text-white sm:text-4xl"
+          custom={1}
+          variants={sectionFade}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          className="mb-4 text-3xl font-bold text-white sm:text-4xl lg:text-5xl"
         >
           Experimental Playground
         </motion.h2>
 
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-16 max-w-2xl text-base text-white/40"
+          custom={2}
+          variants={sectionFade}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          className="mb-16 max-w-2xl text-base text-white/35 sm:text-lg"
         >
           Interactive AI demos and experiments showcasing enterprise AI capabilities.
         </motion.p>
 
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-5 sm:grid-cols-2">
           {experiments.map((exp, i) => (
             <motion.div
               key={exp.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 + i * 0.1 }}
-              className="neon-border group relative overflow-hidden rounded-2xl bg-[#0d0d1a] p-6"
+              custom={3 + i}
+              variants={sectionFade}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+              className="card-glass group relative overflow-hidden rounded-2xl p-6"
             >
               <div className="flex items-start justify-between">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#00d4ff]/20 bg-[#00d4ff]/5">
-                  <Beaker size={18} className="text-[#00d4ff]" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#00d4ff]/10 bg-[#00d4ff]/5 transition-all duration-500 group-hover:border-[#00d4ff]/25 group-hover:bg-[#00d4ff]/10">
+                  <Beaker size={18} className="text-[#00d4ff]/70" />
                 </div>
-                <span className="flex items-center gap-1.5 rounded-full border border-[#ffaa00]/20 bg-[#ffaa00]/5 px-3 py-1 font-mono text-[10px] text-[#ffaa00]">
+                <span className="flex items-center gap-1.5 rounded-full border border-[#ffaa00]/15 bg-[#ffaa00]/5 px-3 py-1 font-mono text-[10px] text-[#ffaa00]/80">
                   <Lock size={10} />
                   Coming Soon
                 </span>
               </div>
 
-              <div className="mt-4">
-                <span className="font-mono text-[10px] text-[#00d4ff]/60">{exp.category}</span>
-                <h3 className="mt-1 text-lg font-bold text-white/80">{exp.title}</h3>
-                <p className="mt-2 text-sm text-white/40">{exp.description}</p>
+              <div className="mt-5">
+                <span className="font-mono text-[10px] text-[#00d4ff]/50">{exp.category}</span>
+                <h3 className="mt-1.5 text-lg font-bold text-white/80">{exp.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-white/35">{exp.description}</p>
               </div>
 
-              <div className="mt-4 flex items-center gap-1 text-xs text-white/20">
+              <div className="mt-5 flex items-center gap-1.5 text-xs text-white/20 transition-all duration-500 group-hover:gap-2.5 group-hover:text-white/40">
                 <span>Notify me when live</span>
                 <ArrowRight size={12} />
               </div>
 
               {/* Disabled overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050510]/30 to-transparent pointer-events-none" />
             </motion.div>
           ))}
         </div>

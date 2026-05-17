@@ -31,65 +31,76 @@ const blogPosts = [
   },
 ];
 
+const sectionFade = {
+  hidden: { opacity: 0, y: 40, filter: 'blur(8px)' },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] as const },
+  }),
+};
+
 export default function Blog() {
-  const { ref, isInView } = useInView(0.2);
+  const { ref, isInView } = useInView(0.1);
 
   return (
-    <section id="blog" className="relative overflow-hidden bg-black py-32">
-      <div className="absolute inset-0 grid-bg opacity-20" />
+    <section id="blog" className="section-glow relative overflow-hidden bg-[#050510] py-36">
+      <div className="absolute inset-0 grid-bg opacity-15" />
 
       <div ref={ref} className="relative z-10 mx-auto max-w-7xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="mb-4 flex items-center gap-3"
+          custom={0}
+          variants={sectionFade}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          className="mb-6 flex items-center gap-3"
         >
-          <div className="h-px w-12 bg-[#00d4ff]/50" />
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#00d4ff]">
+          <div className="h-px w-12 bg-gradient-to-r from-[#00d4ff]/60 to-transparent" />
+          <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#00d4ff]/80">
             Tech Blog
           </span>
         </motion.div>
 
-        <div className="mb-16 flex items-end justify-between">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-3xl font-bold text-white sm:text-4xl"
-          >
-            Insights & Writing
-          </motion.h2>
-        </div>
+        <motion.h2
+          custom={1}
+          variants={sectionFade}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          className="mb-16 text-3xl font-bold text-white sm:text-4xl lg:text-5xl"
+        >
+          Insights & Writing
+        </motion.h2>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {blogPosts.map((post, i) => (
             <motion.article
               key={post.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
-              className="neon-border group rounded-2xl bg-[#0d0d1a] p-6 transition-all duration-300"
+              custom={2 + i}
+              variants={sectionFade}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+              className="card-glass group rounded-2xl p-6"
             >
               <div className="mb-4 flex items-center justify-between">
-                <span className="rounded-full border border-[#00d4ff]/15 bg-[#00d4ff]/5 px-3 py-1 font-mono text-[10px] text-[#00d4ff]/80">
+                <span className="rounded-full border border-[#00d4ff]/10 bg-[#00d4ff]/4 px-3 py-1 font-mono text-[10px] text-[#00d4ff]/70">
                   {post.category}
                 </span>
-                <div className="flex items-center gap-1 text-white/30">
+                <div className="flex items-center gap-1.5 text-white/25">
                   <Clock size={12} />
                   <span className="font-mono text-[10px]">{post.readTime}</span>
                 </div>
               </div>
 
               <div className="mb-3 flex items-center gap-2">
-                <BookOpen size={14} className="text-[#00d4ff]/40" />
-                <span className="font-mono text-[10px] text-white/30">{post.date}</span>
+                <BookOpen size={14} className="text-[#00d4ff]/30" />
+                <span className="font-mono text-[10px] text-white/25">{post.date}</span>
               </div>
 
-              <h3 className="mb-3 text-lg font-bold text-white/80">{post.title}</h3>
-              <p className="mb-4 text-sm leading-relaxed text-white/40">{post.excerpt}</p>
+              <h3 className="mb-3 text-lg font-bold text-white/80 transition-colors duration-500 group-hover:text-white">{post.title}</h3>
+              <p className="mb-5 text-sm leading-relaxed text-white/35">{post.excerpt}</p>
 
-              <div className="flex items-center gap-1 text-xs text-white/20">
+              <div className="flex items-center gap-1.5 text-xs text-white/20 transition-all duration-500 group-hover:gap-2.5 group-hover:text-white/40">
                 <span>Read article</span>
                 <ArrowRight size={12} />
               </div>

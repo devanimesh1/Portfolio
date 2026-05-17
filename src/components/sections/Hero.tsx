@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { MessageSquare, Briefcase, Mail } from 'lucide-react';
+import { MessageSquare, Briefcase, Mail, ArrowDown } from 'lucide-react';
 import { personalInfo } from '@/data/resume';
 
 function ParticleField() {
@@ -31,14 +31,14 @@ function ParticleField() {
     resize();
     window.addEventListener('resize', resize);
 
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 60; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        size: Math.random() * 2 + 0.5,
-        alpha: Math.random() * 0.5 + 0.1,
+        vx: (Math.random() - 0.5) * 0.2,
+        vy: (Math.random() - 0.5) * 0.2,
+        size: Math.random() * 1.5 + 0.3,
+        alpha: Math.random() * 0.3 + 0.05,
       });
     }
 
@@ -63,11 +63,11 @@ function ParticleField() {
           const dx = particles[j].x - p.x;
           const dy = particles[j].y - p.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
+          if (dist < 150) {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(0, 212, 255, ${0.08 * (1 - dist / 120)})`;
+            ctx.strokeStyle = `rgba(0, 212, 255, ${0.04 * (1 - dist / 150)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -92,77 +92,90 @@ function AIPortrait() {
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1.2, delay: 0.5, ease: 'easeOut' }}
+      transition={{ duration: 1.5, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className="relative"
     >
-      <div className="relative mx-auto h-64 w-64 sm:h-80 sm:w-80 lg:h-96 lg:w-96">
-        {/* Outer glow ring */}
-        <div className="absolute inset-[-20px] rounded-full bg-gradient-to-r from-[#00d4ff]/20 via-transparent to-[#00d4ff]/20 blur-xl" />
+      <div className="relative mx-auto h-64 w-64 sm:h-80 sm:w-80 lg:h-[420px] lg:w-[420px]">
+        {/* Ambient glow */}
+        <div className="absolute inset-[-40px] rounded-full bg-[#00d4ff]/5 blur-3xl" />
+        <div className="absolute inset-[-20px] rounded-full bg-[#aa44ff]/3 blur-2xl" />
 
-        {/* Animated rings */}
+        {/* Animated orbital rings */}
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-          className="absolute inset-[-10px] rounded-full border border-[#00d4ff]/20"
+          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+          className="absolute inset-[-15px] rounded-full border border-[#00d4ff]/10"
         />
         <motion.div
           animate={{ rotate: -360 }}
-          transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-          className="absolute inset-[-25px] rounded-full border border-[#00d4ff]/10"
+          transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
+          className="absolute inset-[-30px] rounded-full border border-[#aa44ff]/8"
           style={{ borderStyle: 'dashed' }}
+        />
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 50, repeat: Infinity, ease: 'linear' }}
+          className="absolute inset-[-45px] rounded-full border border-white/3"
         />
 
         {/* Portrait container */}
-        <div className="relative h-full w-full overflow-hidden rounded-full border-2 border-[#00d4ff]/30 bg-gradient-to-br from-[#0d0d1a] to-[#1a1a2e]">
-          {/* AI scan line effect */}
+        <div className="relative h-full w-full overflow-hidden rounded-full border border-[#00d4ff]/20 bg-gradient-to-br from-[#0a0a18] via-[#12122a] to-[#0a0a18]">
+          {/* Scan line */}
           <motion.div
-            animate={{ y: ['-100%', '200%'] }}
-            transition={{ duration: 3, repeat: Infinity, repeatDelay: 2 }}
-            className="absolute inset-x-0 z-10 h-1 bg-gradient-to-b from-transparent via-[#00d4ff]/40 to-transparent"
+            animate={{ y: ['-100%', '300%'] }}
+            transition={{ duration: 4, repeat: Infinity, repeatDelay: 3, ease: 'linear' }}
+            className="absolute inset-x-0 z-10 h-px bg-gradient-to-r from-transparent via-[#00d4ff]/30 to-transparent"
           />
 
-          {/* Portrait placeholder with AI visualization */}
+          {/* Portrait placeholder */}
           <div className="flex h-full w-full items-center justify-center">
-            <div className="relative">
-              <motion.div
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="text-6xl font-bold text-[#00d4ff]/40 sm:text-7xl lg:text-8xl"
-              >
-                AP
-              </motion.div>
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d1a] via-transparent to-transparent" />
-            </div>
+            <motion.div
+              animate={{ opacity: [0.4, 0.8, 0.4] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              className="text-gradient text-6xl font-bold sm:text-7xl lg:text-8xl"
+              style={{ WebkitTextFillColor: 'unset', opacity: 0.4 }}
+            >
+              AP
+            </motion.div>
           </div>
 
-          {/* HUD overlay elements */}
-          <div className="absolute left-4 top-4 font-mono text-[10px] text-[#00d4ff]/40">
+          {/* HUD elements */}
+          <div className="absolute left-5 top-5 font-mono text-[9px] text-[#00d4ff]/30 leading-relaxed">
             <div>SYS.ACTIVE</div>
             <div>AI.READY</div>
           </div>
-          <div className="absolute bottom-4 right-4 font-mono text-[10px] text-[#00d4ff]/40">
+          <div className="absolute bottom-5 right-5 font-mono text-[9px] text-[#00d4ff]/30 leading-relaxed text-right">
             <div>v5.0</div>
             <div>GCP.LINKED</div>
           </div>
+
+          {/* Inner glow */}
+          <div className="absolute inset-0 rounded-full bg-gradient-to-t from-[#050510] via-transparent to-transparent opacity-60" />
         </div>
 
-        {/* Floating data points */}
-        {[0, 1, 2, 3].map((i) => (
+        {/* Floating orbs */}
+        {[0, 1, 2, 3, 4].map((i) => (
           <motion.div
             key={i}
             animate={{
-              y: [0, -10, 0],
-              opacity: [0.3, 0.8, 0.3],
+              y: [0, -15, 0],
+              opacity: [0.2, 0.6, 0.2],
+              scale: [1, 1.2, 1],
             }}
             transition={{
-              duration: 2 + i * 0.5,
+              duration: 3 + i * 0.7,
               repeat: Infinity,
-              delay: i * 0.3,
+              delay: i * 0.5,
+              ease: 'easeInOut',
             }}
-            className="absolute h-2 w-2 rounded-full bg-[#00d4ff]/50"
+            className="absolute rounded-full"
             style={{
-              top: `${20 + i * 20}%`,
-              left: i % 2 === 0 ? '-5%' : '100%',
+              width: 4 + i * 1.5,
+              height: 4 + i * 1.5,
+              background: i % 2 === 0 ? 'rgba(0, 212, 255, 0.4)' : 'rgba(170, 68, 255, 0.4)',
+              top: `${15 + i * 18}%`,
+              left: i % 2 === 0 ? '-8%' : '103%',
+              filter: 'blur(0.5px)',
             }}
           />
         ))}
@@ -170,6 +183,24 @@ function AIPortrait() {
     </motion.div>
   );
 }
+
+const stagger = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+  },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30, filter: 'blur(10px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
+  },
+};
 
 export default function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -179,109 +210,109 @@ export default function Hero() {
   });
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
-  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
+  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   return (
     <section
       ref={sectionRef}
       id="hero"
-      className="relative flex min-h-screen items-center overflow-hidden bg-black"
+      className="aurora-bg relative flex min-h-screen items-center overflow-hidden bg-[#050510]"
     >
-      {/* Background */}
+      {/* Background layers */}
       <motion.div style={{ y: backgroundY }} className="absolute inset-0">
         <ParticleField />
-        <div className="grid-bg absolute inset-0 opacity-30" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black" />
+        <div className="grid-bg absolute inset-0 opacity-20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#050510]/40 to-[#050510]" />
       </motion.div>
+
+      {/* Ambient gradient orbs */}
+      <div className="pointer-events-none absolute left-[-20%] top-[-10%] h-[600px] w-[600px] rounded-full bg-[#00d4ff]/3 blur-[120px]" />
+      <div className="pointer-events-none absolute right-[-10%] bottom-[10%] h-[400px] w-[400px] rounded-full bg-[#aa44ff]/3 blur-[100px]" />
 
       {/* Content */}
       <motion.div
         style={{ y: textY, opacity }}
         className="relative z-10 mx-auto w-full max-w-7xl px-6 py-32"
       >
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+        <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-24">
           {/* Text Content */}
-          <div className="order-2 lg:order-1">
+          <motion.div
+            className="order-2 lg:order-1"
+            variants={stagger}
+            initial="hidden"
+            animate="visible"
+          >
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#00d4ff]/20 bg-[#00d4ff]/5 px-4 py-1.5"
+              variants={fadeUp}
+              className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#00d4ff]/15 bg-[#00d4ff]/5 px-5 py-2 backdrop-blur-sm"
             >
-              <span className="h-2 w-2 animate-pulse rounded-full bg-[#00ff88]" />
-              <span className="font-mono text-xs tracking-wider text-[#00d4ff]">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00ff88] opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#00ff88]" />
+              </span>
+              <span className="font-mono text-[11px] tracking-wider text-[#00d4ff]/90">
                 AVAILABLE FOR OPPORTUNITIES
               </span>
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="mb-6 text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl"
+              variants={fadeUp}
+              className="mb-6 text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl"
             >
               {personalInfo.name}
               <br />
-              <span className="text-gradient">
+              <span className="text-gradient-warm">
                 {personalInfo.headline}
               </span>
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="mb-4 font-mono text-lg tracking-wider text-[#00d4ff]/80"
+              variants={fadeUp}
+              className="mb-3 font-mono text-base tracking-wider text-[#00d4ff]/70 sm:text-lg"
             >
               {personalInfo.title}
             </motion.p>
 
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="mb-8 max-w-lg text-base leading-relaxed text-white/50"
+              variants={fadeUp}
+              className="mb-10 max-w-lg text-base leading-relaxed text-white/40 sm:text-lg"
             >
               5+ years shipping production AI across fintech, telecom, healthcare & public sector.
               Specializing in GCP, Vertex AI, Dialogflow CX, and Agentic AI systems.
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              variants={fadeUp}
               className="flex flex-wrap gap-3"
             >
               <a
                 href="#chatbot"
-                className="group flex items-center gap-2 rounded-full border border-[#00d4ff]/40 bg-[#00d4ff]/10 px-6 py-3 text-sm font-medium text-[#00d4ff] transition-all hover:bg-[#00d4ff]/20 hover:shadow-lg hover:shadow-[#00d4ff]/10"
+                className="group relative flex items-center gap-2.5 overflow-hidden rounded-full border border-[#00d4ff]/30 bg-[#00d4ff]/10 px-7 py-3.5 text-sm font-medium text-[#00d4ff] backdrop-blur-sm transition-all duration-500 hover:border-[#00d4ff]/50 hover:bg-[#00d4ff]/15 hover:shadow-[0_0_30px_rgba(0,212,255,0.15)]"
               >
                 <MessageSquare size={16} />
                 Talk to My AI
               </a>
               <a
                 href="#projects"
-                className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-medium text-white/80 transition-all hover:bg-white/10"
+                className="flex items-center gap-2.5 rounded-full border border-white/8 bg-white/4 px-7 py-3.5 text-sm font-medium text-white/70 backdrop-blur-sm transition-all duration-500 hover:border-white/15 hover:bg-white/8 hover:text-white"
               >
                 <Briefcase size={16} />
-                View Enterprise Projects
+                View Projects
               </a>
               <a
                 href="#contact"
-                className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-medium text-white/80 transition-all hover:bg-white/10"
+                className="flex items-center gap-2.5 rounded-full border border-white/8 bg-white/4 px-7 py-3.5 text-sm font-medium text-white/70 backdrop-blur-sm transition-all duration-500 hover:border-white/15 hover:bg-white/8 hover:text-white"
               >
                 <Mail size={16} />
                 Hire / Contact
               </a>
             </motion.div>
 
-            {/* Quick stats */}
+            {/* Stats */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 1 }}
-              className="mt-12 grid grid-cols-3 gap-6 border-t border-white/5 pt-8"
+              variants={fadeUp}
+              className="mt-14 grid grid-cols-3 gap-8 border-t border-white/5 pt-8"
             >
               {[
                 { value: '5+', label: 'Years Experience' },
@@ -289,12 +320,12 @@ export default function Hero() {
                 { value: '30%', label: 'Agent Dependency Cut' },
               ].map((stat) => (
                 <div key={stat.label}>
-                  <div className="text-2xl font-bold text-white">{stat.value}</div>
-                  <div className="mt-1 text-xs text-white/40">{stat.label}</div>
+                  <div className="text-2xl font-bold text-white sm:text-3xl">{stat.value}</div>
+                  <div className="mt-1.5 text-xs text-white/30">{stat.label}</div>
                 </div>
               ))}
             </motion.div>
-          </div>
+          </motion.div>
 
           {/* AI Portrait */}
           <div className="order-1 flex justify-center lg:order-2">
@@ -307,16 +338,16 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
+        transition={{ delay: 2.5, duration: 1 }}
+        className="absolute bottom-10 left-1/2 z-10 -translate-x-1/2"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="flex flex-col items-center gap-2"
+          transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+          className="flex flex-col items-center gap-3"
         >
-          <span className="text-[10px] uppercase tracking-[0.3em] text-white/30">Scroll</span>
-          <div className="h-8 w-px bg-gradient-to-b from-[#00d4ff]/50 to-transparent" />
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/20">Scroll</span>
+          <ArrowDown size={14} className="text-white/20" />
         </motion.div>
       </motion.div>
     </section>

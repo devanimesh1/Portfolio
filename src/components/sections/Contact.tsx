@@ -13,8 +13,20 @@ import {
 } from 'lucide-react';
 import { FaLinkedinIn, FaGithub } from 'react-icons/fa';
 
+const sectionFade = {
+  hidden: { opacity: 0, y: 40, filter: 'blur(8px)' },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] as const },
+  }),
+};
+
+const inputClass = 'w-full rounded-xl border border-white/[0.06] bg-white/[0.03] px-4 py-3 text-sm text-white outline-none transition-all duration-500 placeholder:text-white/20 focus:border-[#00d4ff]/20 focus:bg-white/[0.05] focus:shadow-[0_0_20px_rgba(0,212,255,0.05)]';
+
 export default function Contact() {
-  const { ref, isInView } = useInView(0.1);
+  const { ref, isInView } = useInView(0.05);
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -41,57 +53,63 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-black py-32">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0d0d1a]/50 via-transparent to-[#0d0d1a]/50" />
+    <section id="contact" className="section-glow aurora-bg relative overflow-hidden bg-[#050510] py-36">
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a18]/60 via-transparent to-[#0a0a18]/60" />
 
       <div ref={ref} className="relative z-10 mx-auto max-w-7xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="mb-4 flex items-center gap-3"
+          custom={0}
+          variants={sectionFade}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          className="mb-6 flex items-center gap-3"
         >
-          <div className="h-px w-12 bg-[#00d4ff]/50" />
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#00d4ff]">
+          <div className="h-px w-12 bg-gradient-to-r from-[#00d4ff]/60 to-transparent" />
+          <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#00d4ff]/80">
             Contact
           </span>
         </motion.div>
 
         <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="mb-16 text-3xl font-bold text-white sm:text-4xl"
+          custom={1}
+          variants={sectionFade}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          className="mb-16 text-3xl font-bold text-white sm:text-4xl lg:text-5xl"
         >
           Let&apos;s Build Together
         </motion.h2>
 
-        <div className="grid gap-12 lg:grid-cols-5">
+        <div className="grid gap-12 lg:grid-cols-5 lg:gap-16">
           {/* Contact info & availability */}
           <div className="lg:col-span-2">
             {/* Availability widget */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="neon-border mb-8 rounded-2xl bg-[#0d0d1a] p-6"
+              custom={2}
+              variants={sectionFade}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+              className="card-glass mb-8 rounded-2xl p-6"
             >
-              <div className="mb-4 flex items-center gap-2">
-                <div className="h-2 w-2 animate-pulse rounded-full bg-[#00ff88]" />
-                <span className="font-mono text-xs uppercase tracking-wider text-[#00ff88]">
+              <div className="mb-5 flex items-center gap-2.5">
+                <div className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00ff88] opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#00ff88]" />
+                </div>
+                <span className="font-mono text-[11px] uppercase tracking-wider text-[#00ff88]/80">
                   System Status: Available
                 </span>
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-3.5">
                 {availabilityItems.map((item) => (
                   <div key={item.label} className="flex items-center justify-between">
-                    <span className="text-sm text-white/60">{item.label}</span>
+                    <span className="text-sm text-white/50">{item.label}</span>
                     <span
                       className={`rounded-full px-3 py-0.5 font-mono text-[10px] ${
                         item.active
-                          ? 'bg-[#00ff88]/10 text-[#00ff88]'
-                          : 'bg-white/5 text-white/30'
+                          ? 'bg-[#00ff88]/8 text-[#00ff88]/80'
+                          : 'bg-white/4 text-white/25'
                       }`}
                     >
                       {item.active ? 'OPEN' : 'CLOSED'}
@@ -103,49 +121,50 @@ export default function Contact() {
 
             {/* Contact channels */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              custom={3}
+              variants={sectionFade}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
               className="space-y-3"
             >
               <a
                 href={`https://wa.me/918358843232`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="neon-border flex items-center gap-4 rounded-xl bg-[#0d0d1a] p-4 transition-all hover:bg-[#141428]"
+                className="card-glass flex items-center gap-4 rounded-xl p-4"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#25D366]/20 bg-[#25D366]/10">
-                  <MessageCircle size={18} className="text-[#25D366]" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#25D366]/15 bg-[#25D366]/5">
+                  <MessageCircle size={18} className="text-[#25D366]/80" />
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-white">WhatsApp</div>
-                  <div className="font-mono text-xs text-white/40">Preferred • Fastest response</div>
+                  <div className="text-sm font-medium text-white/90">WhatsApp</div>
+                  <div className="font-mono text-[11px] text-white/30">Preferred • Fastest response</div>
                 </div>
               </a>
 
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="neon-border flex items-center gap-4 rounded-xl bg-[#0d0d1a] p-4 transition-all hover:bg-[#141428]"
+                className="card-glass flex items-center gap-4 rounded-xl p-4"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#00d4ff]/20 bg-[#00d4ff]/10">
-                  <Mail size={18} className="text-[#00d4ff]" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#00d4ff]/15 bg-[#00d4ff]/5">
+                  <Mail size={18} className="text-[#00d4ff]/80" />
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-white">Email</div>
-                  <div className="font-mono text-xs text-white/40">{personalInfo.email}</div>
+                  <div className="text-sm font-medium text-white/90">Email</div>
+                  <div className="font-mono text-[11px] text-white/30">{personalInfo.email}</div>
                 </div>
               </a>
 
               <a
                 href={`tel:${personalInfo.phone}`}
-                className="neon-border flex items-center gap-4 rounded-xl bg-[#0d0d1a] p-4 transition-all hover:bg-[#141428]"
+                className="card-glass flex items-center gap-4 rounded-xl p-4"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#ffaa00]/20 bg-[#ffaa00]/10">
-                  <Phone size={18} className="text-[#ffaa00]" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#ffaa00]/15 bg-[#ffaa00]/5">
+                  <Phone size={18} className="text-[#ffaa00]/80" />
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-white">Phone</div>
-                  <div className="font-mono text-xs text-white/40">{personalInfo.phone}</div>
+                  <div className="text-sm font-medium text-white/90">Phone</div>
+                  <div className="font-mono text-[11px] text-white/30">{personalInfo.phone}</div>
                 </div>
               </a>
 
@@ -154,17 +173,17 @@ export default function Contact() {
                   href={personalInfo.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white/60 transition-all hover:border-[#0077B5]/30 hover:bg-[#0077B5]/10 hover:text-[#0077B5]"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/[0.06] bg-white/[0.03] text-white/40 transition-all duration-500 hover:border-[#0077B5]/20 hover:bg-[#0077B5]/5 hover:text-[#0077B5]"
                 >
-                  <FaLinkedinIn size={18} />
+                  <FaLinkedinIn size={16} />
                 </a>
                 <a
                   href={personalInfo.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white/60 transition-all hover:border-white/30 hover:bg-white/10 hover:text-white"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/[0.06] bg-white/[0.03] text-white/40 transition-all duration-500 hover:border-white/15 hover:bg-white/5 hover:text-white"
                 >
-                  <FaGithub size={18} />
+                  <FaGithub size={16} />
                 </a>
               </div>
             </motion.div>
@@ -172,24 +191,25 @@ export default function Contact() {
 
           {/* Contact form */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            custom={4}
+            variants={sectionFade}
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
             className="lg:col-span-3"
           >
             {submitted ? (
-              <div className="flex h-full flex-col items-center justify-center rounded-2xl border border-[#00ff88]/20 bg-[#00ff88]/5 p-12 text-center">
-                <CheckCircle size={48} className="mb-4 text-[#00ff88]" />
+              <div className="card-glass flex h-full flex-col items-center justify-center rounded-2xl border-[#00ff88]/10 p-12 text-center">
+                <CheckCircle size={48} className="mb-4 text-[#00ff88]/80" />
                 <h3 className="mb-2 text-xl font-bold text-white">Message Sent!</h3>
-                <p className="text-sm text-white/50">
+                <p className="text-sm text-white/40">
                   I&apos;ll get back to you within 24 hours.
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="neon-border rounded-2xl bg-[#0d0d1a] p-8">
+              <form onSubmit={handleSubmit} className="card-glass rounded-2xl p-8">
                 <div className="mb-6 grid gap-4 sm:grid-cols-2">
                   <div>
-                    <label className="mb-1.5 block font-mono text-xs uppercase tracking-wider text-white/40">
+                    <label className="mb-2 block font-mono text-[11px] uppercase tracking-wider text-white/30">
                       Name *
                     </label>
                     <input
@@ -199,12 +219,12 @@ export default function Contact() {
                       onChange={(e) =>
                         setFormState((s) => ({ ...s, name: e.target.value }))
                       }
-                      className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white outline-none transition-all placeholder:text-white/20 focus:border-[#00d4ff]/30 focus:bg-white/8"
+                      className={inputClass}
                       placeholder="Your name"
                     />
                   </div>
                   <div>
-                    <label className="mb-1.5 block font-mono text-xs uppercase tracking-wider text-white/40">
+                    <label className="mb-2 block font-mono text-[11px] uppercase tracking-wider text-white/30">
                       Email *
                     </label>
                     <input
@@ -214,12 +234,12 @@ export default function Contact() {
                       onChange={(e) =>
                         setFormState((s) => ({ ...s, email: e.target.value }))
                       }
-                      className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white outline-none transition-all placeholder:text-white/20 focus:border-[#00d4ff]/30 focus:bg-white/8"
+                      className={inputClass}
                       placeholder="your@email.com"
                     />
                   </div>
                   <div>
-                    <label className="mb-1.5 block font-mono text-xs uppercase tracking-wider text-white/40">
+                    <label className="mb-2 block font-mono text-[11px] uppercase tracking-wider text-white/30">
                       Company
                     </label>
                     <input
@@ -228,12 +248,12 @@ export default function Contact() {
                       onChange={(e) =>
                         setFormState((s) => ({ ...s, company: e.target.value }))
                       }
-                      className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white outline-none transition-all placeholder:text-white/20 focus:border-[#00d4ff]/30 focus:bg-white/8"
+                      className={inputClass}
                       placeholder="Company name"
                     />
                   </div>
                   <div>
-                    <label className="mb-1.5 block font-mono text-xs uppercase tracking-wider text-white/40">
+                    <label className="mb-2 block font-mono text-[11px] uppercase tracking-wider text-white/30">
                       Role
                     </label>
                     <input
@@ -242,12 +262,12 @@ export default function Contact() {
                       onChange={(e) =>
                         setFormState((s) => ({ ...s, role: e.target.value }))
                       }
-                      className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white outline-none transition-all placeholder:text-white/20 focus:border-[#00d4ff]/30 focus:bg-white/8"
+                      className={inputClass}
                       placeholder="Hiring for..."
                     />
                   </div>
                   <div>
-                    <label className="mb-1.5 block font-mono text-xs uppercase tracking-wider text-white/40">
+                    <label className="mb-2 block font-mono text-[11px] uppercase tracking-wider text-white/30">
                       Industry
                     </label>
                     <input
@@ -256,12 +276,12 @@ export default function Contact() {
                       onChange={(e) =>
                         setFormState((s) => ({ ...s, industry: e.target.value }))
                       }
-                      className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white outline-none transition-all placeholder:text-white/20 focus:border-[#00d4ff]/30 focus:bg-white/8"
+                      className={inputClass}
                       placeholder="Your industry"
                     />
                   </div>
                   <div>
-                    <label className="mb-1.5 block font-mono text-xs uppercase tracking-wider text-white/40">
+                    <label className="mb-2 block font-mono text-[11px] uppercase tracking-wider text-white/30">
                       Timeline
                     </label>
                     <select
@@ -269,19 +289,19 @@ export default function Contact() {
                       onChange={(e) =>
                         setFormState((s) => ({ ...s, timeline: e.target.value }))
                       }
-                      className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white outline-none transition-all focus:border-[#00d4ff]/30"
+                      className={inputClass}
                     >
-                      <option value="" className="bg-[#0d0d1a]">Select timeline</option>
-                      <option value="immediate" className="bg-[#0d0d1a]">Immediate</option>
-                      <option value="1-2weeks" className="bg-[#0d0d1a]">1-2 weeks</option>
-                      <option value="1month" className="bg-[#0d0d1a]">1 month</option>
-                      <option value="flexible" className="bg-[#0d0d1a]">Flexible</option>
+                      <option value="" className="bg-[#0a0a18]">Select timeline</option>
+                      <option value="immediate" className="bg-[#0a0a18]">Immediate</option>
+                      <option value="1-2weeks" className="bg-[#0a0a18]">1-2 weeks</option>
+                      <option value="1month" className="bg-[#0a0a18]">1 month</option>
+                      <option value="flexible" className="bg-[#0a0a18]">Flexible</option>
                     </select>
                   </div>
                 </div>
 
-                <div className="mb-4">
-                  <label className="mb-1.5 block font-mono text-xs uppercase tracking-wider text-white/40">
+                <div className="mb-5">
+                  <label className="mb-2 block font-mono text-[11px] uppercase tracking-wider text-white/30">
                     Preferred Contact
                   </label>
                   <div className="flex gap-2">
@@ -292,10 +312,10 @@ export default function Contact() {
                         onClick={() =>
                           setFormState((s) => ({ ...s, preferredContact: method }))
                         }
-                        className={`rounded-lg px-4 py-2 text-xs capitalize transition-all ${
+                        className={`rounded-xl px-4 py-2.5 text-xs capitalize transition-all duration-500 ${
                           formState.preferredContact === method
-                            ? 'border border-[#00d4ff]/30 bg-[#00d4ff]/10 text-[#00d4ff]'
-                            : 'border border-white/10 bg-white/5 text-white/40 hover:bg-white/8'
+                            ? 'border border-[#00d4ff]/20 bg-[#00d4ff]/8 text-[#00d4ff]'
+                            : 'border border-white/[0.06] bg-white/[0.03] text-white/35 hover:border-white/10 hover:bg-white/[0.05]'
                         }`}
                       >
                         {method}
@@ -305,7 +325,7 @@ export default function Contact() {
                 </div>
 
                 <div className="mb-6">
-                  <label className="mb-1.5 block font-mono text-xs uppercase tracking-wider text-white/40">
+                  <label className="mb-2 block font-mono text-[11px] uppercase tracking-wider text-white/30">
                     Message *
                   </label>
                   <textarea
@@ -315,14 +335,14 @@ export default function Contact() {
                     onChange={(e) =>
                       setFormState((s) => ({ ...s, message: e.target.value }))
                     }
-                    className="w-full resize-none rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white outline-none transition-all placeholder:text-white/20 focus:border-[#00d4ff]/30 focus:bg-white/8"
+                    className={`${inputClass} resize-none`}
                     placeholder="Tell me about your project or opportunity..."
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#00d4ff]/30 bg-[#00d4ff]/10 px-6 py-3 text-sm font-medium text-[#00d4ff] transition-all hover:bg-[#00d4ff]/20"
+                  className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#00d4ff]/20 bg-[#00d4ff]/8 px-6 py-3.5 text-sm font-medium text-[#00d4ff] transition-all duration-500 hover:border-[#00d4ff]/40 hover:bg-[#00d4ff]/15 hover:shadow-[0_0_30px_rgba(0,212,255,0.1)]"
                 >
                   <Send size={16} />
                   Send Message

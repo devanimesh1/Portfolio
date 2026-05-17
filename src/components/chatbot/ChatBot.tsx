@@ -119,13 +119,14 @@ export default function ChatBot() {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full border border-[#00d4ff]/30 bg-[#00d4ff]/10 text-[#00d4ff] shadow-lg shadow-[#00d4ff]/10 backdrop-blur-sm transition-all hover:bg-[#00d4ff]/20 hover:shadow-xl hover:shadow-[#00d4ff]/20"
+            className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-2xl border border-[#00d4ff]/15 bg-[#00d4ff]/5 text-[#00d4ff] shadow-xl shadow-[#00d4ff]/5 backdrop-blur-xl transition-all duration-500 hover:border-[#00d4ff]/30 hover:bg-[#00d4ff]/10 hover:shadow-2xl hover:shadow-[#00d4ff]/10"
             aria-label="Open AI Chat"
           >
             <MessageSquare size={22} />
             <span className="absolute -top-1 -right-1 flex h-3 w-3">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00ff88] opacity-75" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00ff88] opacity-60" />
               <span className="relative inline-flex h-3 w-3 rounded-full bg-[#00ff88]" />
             </span>
           </motion.button>
@@ -139,31 +140,32 @@ export default function ChatBot() {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-6 right-6 z-50 flex h-[600px] w-[400px] max-w-[calc(100vw-3rem)] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a14] shadow-2xl shadow-black/50"
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed bottom-6 right-6 z-50 flex h-[600px] w-[400px] max-w-[calc(100vw-3rem)] flex-col overflow-hidden rounded-2xl border border-white/[0.06] bg-[#0a0a14]/95 shadow-2xl shadow-black/60 backdrop-blur-2xl"
           >
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-white/5 bg-[#0d0d1a] px-5 py-4">
+            <div className="flex items-center justify-between border-b border-white/[0.04] bg-[#0a0a18]/80 px-5 py-4 backdrop-blur-xl">
               <div className="flex items-center gap-3">
-                <div className="relative flex h-8 w-8 items-center justify-center rounded-lg border border-[#00d4ff]/30 bg-[#00d4ff]/10">
-                  <MessageSquare size={14} className="text-[#00d4ff]" />
-                  <div className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-[#0d0d1a] bg-[#00ff88]" />
+                <div className="relative flex h-8 w-8 items-center justify-center rounded-xl border border-[#00d4ff]/15 bg-[#00d4ff]/5">
+                  <MessageSquare size={14} className="text-[#00d4ff]/80" />
+                  <div className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-[#0a0a18] bg-[#00ff88]" />
                 </div>
                 <div>
-                  <div className="text-sm font-semibold text-white">Talk to Animesh</div>
-                  <div className="font-mono text-[10px] text-[#00ff88]">AI Assistant • Online</div>
+                  <div className="text-sm font-semibold text-white/90">Talk to Animesh</div>
+                  <div className="font-mono text-[10px] text-[#00ff88]/70">AI Assistant</div>
                 </div>
               </div>
               <div className="flex items-center gap-1">
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="rounded-lg p-2 text-white/40 transition-colors hover:bg-white/5 hover:text-white"
+                  className="rounded-xl p-2 text-white/30 transition-all duration-300 hover:bg-white/5 hover:text-white/60"
                   aria-label="Minimize chat"
                 >
                   <Minimize2 size={14} />
                 </button>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="rounded-lg p-2 text-white/40 transition-colors hover:bg-white/5 hover:text-white"
+                  className="rounded-xl p-2 text-white/30 transition-all duration-300 hover:bg-white/5 hover:text-white/60"
                   aria-label="Close chat"
                 >
                   <X size={14} />
@@ -176,34 +178,38 @@ export default function ChatBot() {
               {messages.length === 0 && (
                 <div className="space-y-4">
                   {/* Welcome */}
-                  <div className="rounded-xl border border-white/5 bg-white/3 p-4 text-center">
-                    <div className="mb-2 text-2xl">🤖</div>
-                    <h3 className="mb-1 text-sm font-semibold text-white">
+                  <div className="rounded-xl border border-white/[0.04] bg-white/[0.02] p-5 text-center">
+                    <div className="mb-3 flex justify-center">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#00d4ff]/15 bg-[#00d4ff]/5">
+                        <MessageSquare size={18} className="text-[#00d4ff]/70" />
+                      </div>
+                    </div>
+                    <h3 className="mb-1 text-sm font-semibold text-white/90">
                       Talk to Animesh&apos;s AI
                     </h3>
-                    <p className="text-xs text-white/40">
+                    <p className="text-xs text-white/35">
                       Ask about experience, skills, projects, or hiring.
                     </p>
                   </div>
 
                   {/* Trust badge */}
-                  <div className="flex items-center gap-2 rounded-lg border border-[#00d4ff]/10 bg-[#00d4ff]/5 px-3 py-2">
-                    <Shield size={12} className="shrink-0 text-[#00d4ff]" />
-                    <span className="text-[10px] text-[#00d4ff]/80">
+                  <div className="flex items-center gap-2 rounded-xl border border-[#00d4ff]/8 bg-[#00d4ff]/[0.03] px-3 py-2.5">
+                    <Shield size={12} className="shrink-0 text-[#00d4ff]/60" />
+                    <span className="text-[10px] text-[#00d4ff]/60">
                       Responses are generated from verified professional data only.
                     </span>
                   </div>
 
                   {/* Starter prompts */}
                   <div className="space-y-2">
-                    <span className="font-mono text-[10px] uppercase tracking-wider text-white/30">
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-white/25">
                       Suggested Questions
                     </span>
                     {chatbotStarters.map((prompt) => (
                       <button
                         key={prompt}
                         onClick={() => handleSend(prompt)}
-                        className="block w-full rounded-lg border border-white/5 bg-white/3 px-4 py-2.5 text-left text-xs text-white/60 transition-all hover:border-[#00d4ff]/20 hover:bg-[#00d4ff]/5 hover:text-white/80"
+                        className="block w-full rounded-xl border border-white/[0.04] bg-white/[0.02] px-4 py-2.5 text-left text-xs text-white/50 transition-all duration-500 hover:border-[#00d4ff]/15 hover:bg-[#00d4ff]/[0.03] hover:text-white/70"
                       >
                         {prompt}
                       </button>
@@ -213,26 +219,29 @@ export default function ChatBot() {
               )}
 
               {messages.map((msg) => (
-                <div
+                <motion.div
                   key={msg.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                   className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
                     className={`max-w-[85%] rounded-2xl px-4 py-3 ${
                       msg.role === 'user'
-                        ? 'bg-[#00d4ff]/10 text-white'
-                        : 'border border-white/5 bg-white/3 text-white/80'
+                        ? 'bg-[#00d4ff]/8 text-white/90'
+                        : 'border border-white/[0.04] bg-white/[0.02] text-white/70'
                     }`}
                   >
                     <p className="text-sm leading-relaxed">{msg.content}</p>
                     {msg.sources && msg.sources.length > 0 && (
-                      <div className="mt-3 flex flex-wrap gap-1.5 border-t border-white/5 pt-2">
+                      <div className="mt-3 flex flex-wrap gap-1.5 border-t border-white/[0.04] pt-2">
                         {msg.sources.map((source) => {
                           const Icon = sourceIcons[source] || FileText;
                           return (
                             <span
                               key={source}
-                              className="flex items-center gap-1 rounded-full bg-white/5 px-2 py-0.5 font-mono text-[9px] text-white/40"
+                              className="flex items-center gap-1 rounded-full bg-white/[0.04] px-2 py-0.5 font-mono text-[9px] text-white/30"
                             >
                               <Icon size={8} />
                               {source}
@@ -242,27 +251,27 @@ export default function ChatBot() {
                       </div>
                     )}
                   </div>
-                </div>
+                </motion.div>
               ))}
 
               {isTyping && (
                 <div className="flex justify-start">
-                  <div className="rounded-2xl border border-white/5 bg-white/3 px-4 py-3">
-                    <div className="flex gap-1">
+                  <div className="rounded-2xl border border-white/[0.04] bg-white/[0.02] px-4 py-3">
+                    <div className="flex gap-1.5">
                       <motion.div
-                        animate={{ opacity: [0.3, 1, 0.3] }}
-                        transition={{ duration: 1, repeat: Infinity, delay: 0 }}
-                        className="h-2 w-2 rounded-full bg-[#00d4ff]/60"
+                        animate={{ opacity: [0.2, 0.8, 0.2] }}
+                        transition={{ duration: 1.2, repeat: Infinity, delay: 0 }}
+                        className="h-1.5 w-1.5 rounded-full bg-[#00d4ff]/50"
                       />
                       <motion.div
-                        animate={{ opacity: [0.3, 1, 0.3] }}
-                        transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
-                        className="h-2 w-2 rounded-full bg-[#00d4ff]/60"
+                        animate={{ opacity: [0.2, 0.8, 0.2] }}
+                        transition={{ duration: 1.2, repeat: Infinity, delay: 0.2 }}
+                        className="h-1.5 w-1.5 rounded-full bg-[#00d4ff]/50"
                       />
                       <motion.div
-                        animate={{ opacity: [0.3, 1, 0.3] }}
-                        transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
-                        className="h-2 w-2 rounded-full bg-[#00d4ff]/60"
+                        animate={{ opacity: [0.2, 0.8, 0.2] }}
+                        transition={{ duration: 1.2, repeat: Infinity, delay: 0.4 }}
+                        className="h-1.5 w-1.5 rounded-full bg-[#00d4ff]/50"
                       />
                     </div>
                   </div>
@@ -272,7 +281,7 @@ export default function ChatBot() {
             </div>
 
             {/* Input area */}
-            <div className="border-t border-white/5 bg-[#0d0d1a] p-4">
+            <div className="border-t border-white/[0.04] bg-[#0a0a18]/80 p-4 backdrop-blur-xl">
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -280,12 +289,12 @@ export default function ChatBot() {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                   placeholder="Ask about Animesh..."
-                  className="flex-1 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white outline-none placeholder:text-white/20 focus:border-[#00d4ff]/30"
+                  className="flex-1 rounded-xl border border-white/[0.06] bg-white/[0.03] px-4 py-2.5 text-sm text-white outline-none transition-all duration-500 placeholder:text-white/20 focus:border-[#00d4ff]/20 focus:shadow-[0_0_20px_rgba(0,212,255,0.05)]"
                 />
                 <button
                   onClick={() => handleSend()}
                   disabled={!input.trim()}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#00d4ff]/30 bg-[#00d4ff]/10 text-[#00d4ff] transition-all hover:bg-[#00d4ff]/20 disabled:opacity-30"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#00d4ff]/15 bg-[#00d4ff]/5 text-[#00d4ff] transition-all duration-500 hover:border-[#00d4ff]/30 hover:bg-[#00d4ff]/10 disabled:opacity-20"
                   aria-label="Send message"
                 >
                   <Send size={16} />
