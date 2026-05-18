@@ -6,9 +6,9 @@ import { FaLinkedinIn, FaGithub } from 'react-icons/fa';
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-white/[0.04] bg-[#050510] py-14">
+    <footer className="relative border-t border-white/[0.04] bg-[#050510] py-8 sm:py-14">
       <div className="absolute inset-0 bg-gradient-to-t from-[#050510] to-[#0a0a18]/30" />
-      <div className="relative z-10 mx-auto max-w-7xl px-6">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex flex-col items-center justify-between gap-8 sm:flex-row">
           <div className="flex items-center gap-3">
             <div className="flex h-8 w-8 items-center justify-center rounded-xl border border-[#00d4ff]/10 bg-[#00d4ff]/5">

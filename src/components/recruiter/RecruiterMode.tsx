@@ -113,7 +113,7 @@ export default function RecruiterMode() {
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 0.6 }}
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 left-6 z-40 flex items-center gap-2 rounded-2xl border border-[#ffaa00]/15 bg-[#ffaa00]/5 px-4 py-2.5 text-sm font-medium text-[#ffaa00]/80 shadow-xl shadow-[#ffaa00]/5 backdrop-blur-xl transition-all duration-500 hover:border-[#ffaa00]/30 hover:bg-[#ffaa00]/10 hover:text-[#ffaa00] hover:shadow-2xl hover:shadow-[#ffaa00]/10"
+        className="fixed bottom-4 left-4 z-40 flex items-center gap-2 rounded-2xl border border-[#ffaa00]/15 bg-[#ffaa00]/5 px-3 py-2 text-xs font-medium text-[#ffaa00]/80 shadow-xl shadow-[#ffaa00]/5 backdrop-blur-xl transition-all duration-500 hover:border-[#ffaa00]/30 hover:bg-[#ffaa00]/10 hover:text-[#ffaa00] hover:shadow-2xl hover:shadow-[#ffaa00]/10 sm:bottom-6 sm:left-6 sm:px-4 sm:py-2.5 sm:text-sm"
       >
         <Sparkles size={16} />
         <span className="hidden sm:inline">Recruiter Mode</span>
@@ -126,7 +126,7 @@ export default function RecruiterMode() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-6"
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6"
             onClick={() => setIsOpen(false)}
           >
             <div className="absolute inset-0 bg-[#050510]/90 backdrop-blur-md" />
@@ -137,10 +137,10 @@ export default function RecruiterMode() {
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-h-[85vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-white/[0.06] bg-[#0a0a14]/95 backdrop-blur-2xl shadow-2xl"
+              className="relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-white/[0.06] bg-[#0a0a14]/95 backdrop-blur-2xl shadow-2xl"
             >
               {/* Header */}
-              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-white/[0.04] bg-[#0a0a18]/90 px-6 py-4 backdrop-blur-xl">
+              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-white/[0.04] bg-[#0a0a18]/90 px-4 py-3 backdrop-blur-xl sm:px-6 sm:py-4">
                 <div className="flex items-center gap-3">
                   <div className="flex h-8 w-8 items-center justify-center rounded-xl border border-[#ffaa00]/15 bg-[#ffaa00]/5">
                     <BarChart3 size={14} className="text-[#ffaa00]/80" />
@@ -160,7 +160,7 @@ export default function RecruiterMode() {
                 </button>
               </div>
 
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 {!analysis ? (
                   <div className="space-y-6">
                     {/* JD Input */}
@@ -334,7 +334,7 @@ export default function RecruiterMode() {
                       <h4 className="font-mono text-[11px] uppercase tracking-wider text-white/30">
                         Generate ATS Resume
                       </h4>
-                      <div className="grid grid-cols-3 gap-3">
+                      <div className="grid grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-3">
                         {['Recruiter', 'Consulting', 'Technical'].map((type) => (
                           <button
                             key={type}

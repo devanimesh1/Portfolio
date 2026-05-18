@@ -121,7 +121,7 @@ export default function ChatBot() {
             exit={{ scale: 0, opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-2xl border border-[#00d4ff]/15 bg-[#00d4ff]/5 text-[#00d4ff] shadow-xl shadow-[#00d4ff]/5 backdrop-blur-xl transition-all duration-500 hover:border-[#00d4ff]/30 hover:bg-[#00d4ff]/10 hover:shadow-2xl hover:shadow-[#00d4ff]/10"
+            className="fixed bottom-4 right-4 z-40 flex h-12 w-12 items-center justify-center rounded-2xl border border-[#00d4ff]/15 bg-[#00d4ff]/5 text-[#00d4ff] shadow-xl shadow-[#00d4ff]/5 backdrop-blur-xl transition-all duration-500 hover:border-[#00d4ff]/30 hover:bg-[#00d4ff]/10 hover:shadow-2xl hover:shadow-[#00d4ff]/10 sm:bottom-6 sm:right-6 sm:h-14 sm:w-14"
             aria-label="Open AI Chat"
           >
             <MessageSquare size={22} />
@@ -141,7 +141,7 @@ export default function ChatBot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed bottom-6 right-6 z-50 flex h-[600px] w-[400px] max-w-[calc(100vw-3rem)] flex-col overflow-hidden rounded-2xl border border-white/[0.06] bg-[#0a0a14]/95 shadow-2xl shadow-black/60 backdrop-blur-2xl"
+            className="fixed bottom-0 right-0 z-50 flex h-[100dvh] w-full flex-col overflow-hidden border border-white/[0.06] bg-[#0a0a14]/95 shadow-2xl shadow-black/60 backdrop-blur-2xl sm:bottom-6 sm:right-6 sm:h-[600px] sm:w-[400px] sm:max-w-[calc(100vw-3rem)] sm:rounded-2xl"
           >
             {/* Header */}
             <div className="flex items-center justify-between border-b border-white/[0.04] bg-[#0a0a18]/80 px-5 py-4 backdrop-blur-xl">

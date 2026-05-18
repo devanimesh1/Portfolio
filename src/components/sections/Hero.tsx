@@ -233,9 +233,9 @@ export default function Hero() {
       {/* Content */}
       <motion.div
         style={{ y: textY, opacity }}
-        className="relative z-10 mx-auto w-full max-w-7xl px-6 py-32"
+        className="relative z-10 mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 sm:py-32"
       >
-        <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-24">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           {/* Text Content */}
           <motion.div
             className="order-2 lg:order-1"
@@ -245,20 +245,20 @@ export default function Hero() {
           >
             <motion.div
               variants={fadeUp}
-              className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#00d4ff]/15 bg-[#00d4ff]/5 px-5 py-2 backdrop-blur-sm"
+              className="mb-4 inline-flex items-center gap-2.5 rounded-full border border-[#00d4ff]/15 bg-[#00d4ff]/5 px-4 py-1.5 backdrop-blur-sm sm:mb-6 sm:px-5 sm:py-2"
             >
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00ff88] opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-[#00ff88]" />
               </span>
-              <span className="font-mono text-[11px] tracking-wider text-[#00d4ff]/90">
+              <span className="font-mono text-[10px] tracking-wider text-[#00d4ff]/90 sm:text-[11px]">
                 AVAILABLE FOR OPPORTUNITIES
               </span>
             </motion.div>
 
             <motion.h1
               variants={fadeUp}
-              className="mb-6 text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl"
+              className="mb-4 text-3xl font-bold leading-[1.05] tracking-tight text-white sm:mb-6 sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl"
             >
               {personalInfo.name}
               <br />
@@ -269,14 +269,14 @@ export default function Hero() {
 
             <motion.p
               variants={fadeUp}
-              className="mb-3 font-mono text-base tracking-wider text-[#00d4ff]/70 sm:text-lg"
+              className="mb-2 font-mono text-sm tracking-wider text-[#00d4ff]/70 sm:mb-3 sm:text-base lg:text-lg"
             >
               {personalInfo.title}
             </motion.p>
 
             <motion.p
               variants={fadeUp}
-              className="mb-10 max-w-lg text-base leading-relaxed text-white/40 sm:text-lg"
+              className="mb-6 max-w-lg text-sm leading-relaxed text-white/40 sm:mb-10 sm:text-base lg:text-lg"
             >
               5+ years shipping production AI across fintech, telecom, healthcare & public sector.
               Specializing in GCP, Vertex AI, Dialogflow CX, and Agentic AI systems.
@@ -284,25 +284,25 @@ export default function Hero() {
 
             <motion.div
               variants={fadeUp}
-              className="flex flex-wrap gap-3"
+              className="flex flex-col gap-3 sm:flex-row sm:flex-wrap"
             >
               <a
                 href="#chatbot"
-                className="group relative flex items-center gap-2.5 overflow-hidden rounded-full border border-[#00d4ff]/30 bg-[#00d4ff]/10 px-7 py-3.5 text-sm font-medium text-[#00d4ff] backdrop-blur-sm transition-all duration-500 hover:border-[#00d4ff]/50 hover:bg-[#00d4ff]/15 hover:shadow-[0_0_30px_rgba(0,212,255,0.15)]"
+                className="group relative flex items-center justify-center gap-2.5 overflow-hidden rounded-full border border-[#00d4ff]/30 bg-[#00d4ff]/10 px-6 py-3 text-sm font-medium text-[#00d4ff] backdrop-blur-sm transition-all duration-500 hover:border-[#00d4ff]/50 hover:bg-[#00d4ff]/15 hover:shadow-[0_0_30px_rgba(0,212,255,0.15)] sm:px-7 sm:py-3.5"
               >
                 <MessageSquare size={16} />
                 Talk to My AI
               </a>
               <a
                 href="#projects"
-                className="flex items-center gap-2.5 rounded-full border border-white/8 bg-white/4 px-7 py-3.5 text-sm font-medium text-white/70 backdrop-blur-sm transition-all duration-500 hover:border-white/15 hover:bg-white/8 hover:text-white"
+                className="flex items-center justify-center gap-2.5 rounded-full border border-white/8 bg-white/4 px-6 py-3 text-sm font-medium text-white/70 backdrop-blur-sm transition-all duration-500 hover:border-white/15 hover:bg-white/8 hover:text-white sm:px-7 sm:py-3.5"
               >
                 <Briefcase size={16} />
                 View Projects
               </a>
               <a
                 href="#contact"
-                className="flex items-center gap-2.5 rounded-full border border-white/8 bg-white/4 px-7 py-3.5 text-sm font-medium text-white/70 backdrop-blur-sm transition-all duration-500 hover:border-white/15 hover:bg-white/8 hover:text-white"
+                className="flex items-center justify-center gap-2.5 rounded-full border border-white/8 bg-white/4 px-6 py-3 text-sm font-medium text-white/70 backdrop-blur-sm transition-all duration-500 hover:border-white/15 hover:bg-white/8 hover:text-white sm:px-7 sm:py-3.5"
               >
                 <Mail size={16} />
                 Hire / Contact
@@ -312,7 +312,7 @@ export default function Hero() {
             {/* Stats */}
             <motion.div
               variants={fadeUp}
-              className="mt-14 grid grid-cols-3 gap-8 border-t border-white/5 pt-8"
+              className="mt-8 grid grid-cols-3 gap-4 border-t border-white/5 pt-6 sm:mt-14 sm:gap-8 sm:pt-8"
             >
               {[
                 { value: '5+', label: 'Years Experience' },
@@ -320,8 +320,8 @@ export default function Hero() {
                 { value: '30%', label: 'Agent Dependency Cut' },
               ].map((stat) => (
                 <div key={stat.label}>
-                  <div className="text-2xl font-bold text-white sm:text-3xl">{stat.value}</div>
-                  <div className="mt-1.5 text-xs text-white/30">{stat.label}</div>
+                  <div className="text-xl font-bold text-white sm:text-2xl lg:text-3xl">{stat.value}</div>
+                  <div className="mt-1 text-[10px] text-white/30 sm:mt-1.5 sm:text-xs">{stat.label}</div>
                 </div>
               ))}
             </motion.div>

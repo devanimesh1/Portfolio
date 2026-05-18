@@ -34,7 +34,7 @@ export default function Navbar() {
           : 'bg-transparent'
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
         <a href="#" className="group flex items-center gap-3">
           <div className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-[#00d4ff]/20 bg-[#00d4ff]/5 transition-all duration-500 group-hover:border-[#00d4ff]/40 group-hover:bg-[#00d4ff]/10 group-hover:shadow-[0_0_20px_rgba(0,212,255,0.1)]">
             <span className="font-mono text-sm font-bold text-[#00d4ff]">AP</span>
@@ -83,7 +83,7 @@ export default function Navbar() {
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="glass border-t border-white/[0.04] md:hidden"
           >
-            <div className="space-y-1 px-6 py-5">
+            <div className="space-y-1 px-4 py-4 sm:px-6 sm:py-5">
               {navLinks.map((link, i) => (
                 <motion.a
                   key={link.name}

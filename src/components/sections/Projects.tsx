@@ -29,10 +29,10 @@ export default function Projects() {
   const selected = projects.find((p) => p.id === selectedProject);
 
   return (
-    <section id="projects" className="section-glow relative overflow-hidden bg-[#050510] py-36">
+    <section id="projects" className="section-glow vibrant-bg-2 relative overflow-hidden bg-[#050510] py-16 sm:py-24 lg:py-36">
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a18]/60 via-transparent to-[#0a0a18]/60" />
 
-      <div ref={ref} className="relative z-10 mx-auto max-w-7xl px-6">
+      <div ref={ref} className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
         <motion.div
           custom={0}
           variants={sectionFade}
@@ -51,7 +51,7 @@ export default function Projects() {
           variants={sectionFade}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="mb-16 text-3xl font-bold text-white sm:text-4xl lg:text-5xl"
+          className="mb-10 text-2xl font-bold text-white sm:mb-16 sm:text-3xl md:text-4xl lg:text-5xl"
         >
           Production Deployments
         </motion.h2>
@@ -138,7 +138,7 @@ export default function Projects() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-6"
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6"
             onClick={() => setSelectedProject(null)}
           >
             <div className="absolute inset-0 bg-[#050510]/90 backdrop-blur-md" />
@@ -148,7 +148,7 @@ export default function Projects() {
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-h-[80vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-white/[0.06] bg-[#0a0a18] p-8 shadow-2xl"
+              className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-white/[0.06] bg-[#0a0a18] p-4 shadow-2xl sm:p-6 lg:p-8"
             >
               <button
                 onClick={() => setSelectedProject(null)}

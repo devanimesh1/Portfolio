@@ -42,10 +42,10 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="section-glow aurora-bg relative overflow-hidden bg-[#050510] py-36">
+    <section id="about" className="section-glow aurora-bg relative overflow-hidden bg-[#050510] py-16 sm:py-24 lg:py-36">
       <div className="absolute inset-0 grid-bg opacity-15" />
 
-      <div ref={ref} className="relative z-10 mx-auto max-w-7xl px-6">
+      <div ref={ref} className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
         <motion.div
           custom={0}
           variants={sectionFade}
@@ -59,14 +59,14 @@ export default function About() {
           </span>
         </motion.div>
 
-        <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
+        <div className="grid gap-10 sm:gap-16 lg:grid-cols-2 lg:gap-20">
           <div>
             <motion.h2
               custom={1}
               variants={sectionFade}
               initial="hidden"
               animate={isInView ? 'visible' : 'hidden'}
-              className="mb-8 text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl"
+              className="mb-6 text-2xl font-bold leading-tight text-white sm:mb-8 sm:text-3xl md:text-4xl lg:text-5xl"
             >
               Engineering AI Systems
               <br />
@@ -78,7 +78,7 @@ export default function About() {
               variants={sectionFade}
               initial="hidden"
               animate={isInView ? 'visible' : 'hidden'}
-              className="mb-8 text-base leading-relaxed text-white/45 sm:text-lg"
+              className="mb-6 text-sm leading-relaxed text-white/45 sm:mb-8 sm:text-base lg:text-lg"
             >
               {personalInfo.summary}
             </motion.p>
@@ -101,7 +101,7 @@ export default function About() {
             </motion.div>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
             {highlights.map((item, i) => (
               <motion.div
                 key={item.title}

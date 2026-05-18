@@ -18,10 +18,10 @@ export default function Experience() {
   const { ref, isInView } = useInView(0.05);
 
   return (
-    <section id="experience" className="section-glow relative overflow-hidden bg-[#050510] py-36">
+    <section id="experience" className="section-glow vibrant-bg-1 relative overflow-hidden bg-[#050510] py-16 sm:py-24 lg:py-36">
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a18]/60 via-transparent to-[#0a0a18]/60" />
 
-      <div ref={ref} className="relative z-10 mx-auto max-w-5xl px-6">
+      <div ref={ref} className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6">
         <motion.div
           custom={0}
           variants={sectionFade}
@@ -40,7 +40,7 @@ export default function Experience() {
           variants={sectionFade}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="mb-16 text-3xl font-bold text-white sm:text-4xl lg:text-5xl"
+          className="mb-10 text-2xl font-bold text-white sm:mb-16 sm:text-3xl md:text-4xl lg:text-5xl"
         >
           Career Evolution
         </motion.h2>
@@ -48,7 +48,7 @@ export default function Experience() {
         {/* DNA Timeline */}
         <div className="relative">
           {/* Central strand */}
-          <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-[#00d4ff]/30 via-[#aa44ff]/15 to-transparent md:left-1/2" />
+          <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-[#00d4ff]/30 via-[#aa44ff]/15 to-transparent sm:left-6 md:left-1/2" />
 
           {experiences.map((exp, i) => (
             <motion.div
@@ -62,7 +62,7 @@ export default function Experience() {
               }`}
             >
               {/* Timeline node */}
-              <div className="absolute left-6 z-10 md:left-1/2 md:-translate-x-1/2">
+              <div className="absolute left-4 z-10 sm:left-6 md:left-1/2 md:-translate-x-1/2">
                 <motion.div
                   animate={{
                     boxShadow: [
@@ -81,7 +81,7 @@ export default function Experience() {
 
               {/* Content card */}
               <div
-                className={`ml-16 w-full md:ml-0 md:w-[calc(50%-2rem)] ${
+                className={`ml-12 w-full sm:ml-16 md:ml-0 md:w-[calc(50%-2rem)] ${
                   i % 2 === 0 ? 'md:pr-12' : 'md:pl-12'
                 }`}
               >
@@ -143,7 +143,7 @@ export default function Experience() {
           variants={sectionFade}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="mt-16 flex items-center gap-6 card-glass rounded-2xl p-6"
+          className="mt-10 flex items-center gap-4 card-glass rounded-2xl p-4 sm:mt-16 sm:gap-6 sm:p-6"
         >
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#00d4ff]/10 bg-[#00d4ff]/5">
             <span className="text-lg">🎓</span>

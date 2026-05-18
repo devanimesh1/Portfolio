@@ -45,10 +45,10 @@ export default function Blog() {
   const { ref, isInView } = useInView(0.1);
 
   return (
-    <section id="blog" className="section-glow relative overflow-hidden bg-[#050510] py-36">
+    <section id="blog" className="section-glow aurora-bg relative overflow-hidden bg-[#050510] py-16 sm:py-24 lg:py-36">
       <div className="absolute inset-0 grid-bg opacity-15" />
 
-      <div ref={ref} className="relative z-10 mx-auto max-w-7xl px-6">
+      <div ref={ref} className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
         <motion.div
           custom={0}
           variants={sectionFade}
@@ -67,7 +67,7 @@ export default function Blog() {
           variants={sectionFade}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="mb-16 text-3xl font-bold text-white sm:text-4xl lg:text-5xl"
+          className="mb-10 text-2xl font-bold text-white sm:mb-16 sm:text-3xl md:text-4xl lg:text-5xl"
         >
           Insights & Writing
         </motion.h2>

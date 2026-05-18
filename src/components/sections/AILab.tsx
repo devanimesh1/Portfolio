@@ -45,10 +45,10 @@ export default function AILab() {
   const { ref, isInView } = useInView(0.1);
 
   return (
-    <section id="ai-lab" className="section-glow relative overflow-hidden bg-[#050510] py-36">
+    <section id="ai-lab" className="section-glow vibrant-bg-1 relative overflow-hidden bg-[#050510] py-16 sm:py-24 lg:py-36">
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a18]/60 via-transparent to-[#0a0a18]/60" />
 
-      <div ref={ref} className="relative z-10 mx-auto max-w-7xl px-6">
+      <div ref={ref} className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
         <motion.div
           custom={0}
           variants={sectionFade}
@@ -67,7 +67,7 @@ export default function AILab() {
           variants={sectionFade}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="mb-4 text-3xl font-bold text-white sm:text-4xl lg:text-5xl"
+          className="mb-4 text-2xl font-bold text-white sm:text-3xl md:text-4xl lg:text-5xl"
         >
           Experimental Playground
         </motion.h2>
@@ -77,7 +77,7 @@ export default function AILab() {
           variants={sectionFade}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="mb-16 max-w-2xl text-base text-white/35 sm:text-lg"
+          className="mb-10 max-w-2xl text-sm text-white/35 sm:mb-16 sm:text-base lg:text-lg"
         >
           Interactive AI demos and experiments showcasing enterprise AI capabilities.
         </motion.p>

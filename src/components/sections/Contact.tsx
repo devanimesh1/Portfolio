@@ -53,10 +53,10 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="section-glow aurora-bg relative overflow-hidden bg-[#050510] py-36">
+    <section id="contact" className="section-glow aurora-bg relative overflow-hidden bg-[#050510] py-16 sm:py-24 lg:py-36">
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a18]/60 via-transparent to-[#0a0a18]/60" />
 
-      <div ref={ref} className="relative z-10 mx-auto max-w-7xl px-6">
+      <div ref={ref} className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
         <motion.div
           custom={0}
           variants={sectionFade}
@@ -75,7 +75,7 @@ export default function Contact() {
           variants={sectionFade}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="mb-16 text-3xl font-bold text-white sm:text-4xl lg:text-5xl"
+          className="mb-10 text-2xl font-bold text-white sm:mb-16 sm:text-3xl md:text-4xl lg:text-5xl"
         >
           Let&apos;s Build Together
         </motion.h2>
@@ -198,7 +198,7 @@ export default function Contact() {
             className="lg:col-span-3"
           >
             {submitted ? (
-              <div className="card-glass flex h-full flex-col items-center justify-center rounded-2xl border-[#00ff88]/10 p-12 text-center">
+              <div className="card-glass flex h-full flex-col items-center justify-center rounded-2xl border-[#00ff88]/10 p-8 text-center sm:p-12">
                 <CheckCircle size={48} className="mb-4 text-[#00ff88]/80" />
                 <h3 className="mb-2 text-xl font-bold text-white">Message Sent!</h3>
                 <p className="text-sm text-white/40">
@@ -206,7 +206,7 @@ export default function Contact() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="card-glass rounded-2xl p-8">
+              <form onSubmit={handleSubmit} className="card-glass rounded-2xl p-4 sm:p-6 lg:p-8">
                 <div className="mb-6 grid gap-4 sm:grid-cols-2">
                   <div>
                     <label className="mb-2 block font-mono text-[11px] uppercase tracking-wider text-white/30">
