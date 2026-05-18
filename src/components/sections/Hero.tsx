@@ -278,8 +278,8 @@ export default function Hero() {
               variants={fadeUp}
               className="mb-6 max-w-lg text-sm leading-relaxed text-white/40 sm:mb-10 sm:text-base lg:text-lg"
             >
-              5+ years shipping production AI across fintech, telecom, healthcare & public sector.
-              Specializing in GCP, Vertex AI, Dialogflow CX, and Agentic AI systems.
+                            5+ years shipping production AI across fintech, telecom, insurance & public sector.
+                            Specializing in GCP, Vertex AI, Dialogflow CX, and Agentic AI systems.
             </motion.p>
 
             <motion.div

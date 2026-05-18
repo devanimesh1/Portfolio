@@ -35,7 +35,7 @@ const defaultResponses: Record<string, { answer: string; sources: string[] }> = 
   },
   'enterprise': {
     answer:
-      'Animesh has 5+ years leading enterprise AI deployments across fintech (ICICI Prudential), telecom (Bell.ca), insurance (Farmer\'s, Hub International), public sector (Government of Odisha), and pharma (Pfizer). He specializes in scaling production-grade conversational AI, agentic workflows, and RAG systems on GCP.',
+      'Animesh has 5+ years leading enterprise AI deployments across fintech (ICICI Prudential), telecom (Bell.ca), insurance, public sector (Government of Odisha), and pharma. He specializes in scaling production-grade conversational AI, agentic workflows, and RAG systems on GCP.',
     sources: ['Resume', 'LinkedIn'],
   },
   'telecom': {
@@ -57,7 +57,7 @@ function findResponse(query: string): { answer: string; sources: string[] } {
   }
   return {
     answer:
-      "Based on Animesh's verified professional data: He is a Senior GenAI Engineer with 5+ years of experience in Conversational AI, GCP, Vertex AI, Dialogflow CX, Voice AI, and Agentic AI. He has delivered production deployments across fintech, telecom, healthcare, and public sector. Would you like to know about a specific area of his expertise?",
+      "Based on Animesh's verified professional data: He is a Senior GenAI Engineer with 5+ years of experience in Conversational AI, GCP, Vertex AI, Dialogflow CX, Voice AI, and Agentic AI. He has delivered production deployments across fintech, telecom, insurance, and public sector. Would you like to know about a specific area of his expertise?",
     sources: ['Resume', 'LinkedIn'],
   };
 }

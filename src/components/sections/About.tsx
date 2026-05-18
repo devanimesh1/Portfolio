@@ -37,7 +37,7 @@ export default function About() {
     {
       icon: MapPin,
       title: 'Cross-Domain Delivery',
-      desc: 'Fintech, Telecom, Healthcare, Insurance, Public Sector — production deployments.',
+      desc: 'Fintech, Telecom, Insurance, Public Sector, Pharma — production deployments.',
     },
   ];
 
